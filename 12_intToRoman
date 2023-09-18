@@ -1,0 +1,48 @@
+var intToRoman = function (num) {
+  // Brute force solution
+  // Better would have a sub function that would take the Base 10's digit the 5 digit, and then the numerical value at that point such that if given a value 4 and knowledge that for this digit placement it is in the hundreds, use C, D, and M.
+
+  let romanTranslation = "";
+  let runningTotal = num;
+
+  romanTranslation += "M".repeat(Math.floor(runningTotal / 1000));
+  runningTotal = runningTotal % 1000;
+
+  let hundreds = Math.floor(runningTotal / 100);
+
+  if (hundreds === 4) {
+    romanTranslation += "CD";
+  } else if (hundreds === 9) {
+    romanTranslation += "CM";
+  } else if (hundreds >= 5) {
+    romanTranslation += "D" + "C".repeat(hundreds - 5);
+  } else {
+    romanTranslation += "C".repeat(hundreds);
+  }
+
+  runningTotal = runningTotal % 100;
+  let tens = Math.floor(runningTotal / 10);
+
+  if (tens === 4) {
+    romanTranslation += "XL";
+  } else if (tens === 9) {
+    romanTranslation += "XC";
+  } else if (tens >= 5) {
+    romanTranslation += "L" + "X".repeat(tens - 5);
+  } else {
+    romanTranslation += "X".repeat(tens);
+  }
+
+  runningTotal = runningTotal % 10;
+
+  if (runningTotal === 4) {
+    romanTranslation += "IV";
+  } else if (runningTotal === 9) {
+    romanTranslation += "IX";
+  } else if (runningTotal >= 5) {
+    romanTranslation += "V" + "I".repeat(runningTotal - 5);
+  } else {
+    romanTranslation += "I".repeat(runningTotal);
+  }
+  return romanTranslation;
+};
